@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contacts>
+	<contact>
+		<firstName>Ferid</firstName>
+		<lastName>Besic</lastName>
+		<externalId>fbesic</externalId>
+		<phones>
+			<phone>
+				<type>home</type>
+				<number>062-111-111</number>
+			</phone>
+			<phone>
+				<type>office</type>
+				<number>062-222-333</number>
+			</phone>
+		</phones>
+		<addresses>
+			<address>
+				<street>Ulicarska</street>
+				<city>Tuzla</city>
+				<zip>75000</zip>
+			</address>
+		</addresses>
+	</contact>
+	<contact>
+	<firstName>Senad</firstName>
+		<lastName>Besic</lastName>
+		<externalId>sbesic</externalId>
+		<phones>
+			<phone>
+				<type>home</type>
+				<number>062-121-121</number>
+			</phone>
+			<phone>
+				<type>office</type>
+				<number>062-234-356</number>
+			</phone>
+		</phones>
+		<addresses>
+			<address>
+				<street>Ulicarska</street>
+				<city>Tuzla</city>
+				<zip>75000</zip>
+			</address>
+			<address>
+				<street>Armije Bih</street>
+				<city>Tuzla</city>
+				<zip>75000</zip>
+			</address>
+		</addresses>
+	</contact>
+	
+</contacts>

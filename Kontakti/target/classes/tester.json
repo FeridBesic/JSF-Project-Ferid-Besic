@@ -1,0 +1,65 @@
+
+{
+"contacts": [
+
+ { "firstName": "Ferid",
+  "lastName": "Besic",
+  "externalId": "fbesic",
+  "phones": [
+    {
+      "type": "office",
+      "number": "061-123-456"
+    },
+    {
+      "type": "home",
+      "number": "061-222-333"
+    }
+  ],
+  "addresses": [
+  {
+    "street": "Ulicarska",
+    "city": "Tuzla",
+    "zip": "75000"
+    
+  },
+  
+  {
+  "street": "Brcanska",
+    "city": "Tuzla",
+    "zip": "75000"
+  }
+  ]
+},
+
+{
+  
+  "firstName": "Senad",
+  "lastName": "Besic",
+  "externalId": "sbesic",
+  "phones": [
+    {
+      "type": "office",
+      "number": "061-666-666"
+    },
+    {
+      "type": "home",
+      "number": "061-444-333"
+    }
+  ],
+  "addresses": [
+  {
+    "street": "A ne znam vise",
+    "city": "Tuzla",
+    "zip": "75000"
+    
+  },
+  
+  {
+  "street": "Ulicarska",
+    "city": "Tuzla",
+    "zip": "75000"
+  }
+  ]
+}
+]
+}
