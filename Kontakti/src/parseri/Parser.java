@@ -5,11 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,6 +21,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import service.MjestoService;
 import source.AdresaStanovanja;
 import source.Kontakt;
 import source.Osoba;
@@ -29,18 +31,22 @@ public class Parser {
 	private DocumentBuilderFactory dbFactory;
 	private ArrayList<Kontakt> contacts;
 	private JSONParser jsonParser;
+	DocumentBuilder dBuilder;
 	public Parser() {
 		dbFactory = DocumentBuilderFactory.newInstance();
 	    contacts=new ArrayList<Kontakt>();
 	    jsonParser = new JSONParser();
+	   
 
 	}
 	public ArrayList<Kontakt> parseXML(String fileName){
 		  Kontakt k;
+		  MjestoService mj=new MjestoService();
 	      try {
 	         File inputFile = new File(fileName);
 	         //DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+	         
 	         Document doc = dBuilder.parse(inputFile);
 	         doc.getDocumentElement().normalize();
 	         System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
@@ -74,18 +80,28 @@ public class Parser {
 	              List<AdresaStanovanja> adrovi = new ArrayList<AdresaStanovanja>();
 	              for(int i=0;i<adrs.getLength();i++) {
 	            	  Element adresa=(Element) adrs.item(i);
-	            	  adr=new AdresaStanovanja();
+	            	  //adr=new AdresaStanovanja();
 	            	  adr=new AdresaStanovanja(osoba.getId(),
-	            			  adresa.getElementsByTagName("city").item(0).getTextContent(),
+	            			  adresa.getElementsByTagName("street").item(0).getTextContent(),
 	            			  Integer.parseInt(adresa.getElementsByTagName("zip").item(0).getTextContent()));
 	            	  adrovi.add(adr);
+	            	  //LAST ADDITION
+	            	  try {
+	  				if(!mj.CreateMjesto(Integer.parseInt((String)adresa.getElementsByTagName("zip").item(0).getTextContent()),
+	  						adresa.getElementsByTagName("city").item(0).getTextContent()))
+	  					mj.UpdateMjestoGrad(Integer.parseInt((String)adresa.getElementsByTagName("zip").item(0).getTextContent()),
+		  						adresa.getElementsByTagName("city").item(0).getTextContent());
+	            	  }	catch(NumberFormatException e) {
+	            		  e.printStackTrace();
+	            	  }
+	  				
 	              }
 	              k=new Kontakt(osoba,telovi,adrovi);
 	             
 	              contacts.add(k);
 	            
 	         }
-	         
+
 	         }
 	        
 	      }
@@ -94,6 +110,7 @@ public class Parser {
 	      		e.printStackTrace();
 	      		System.out.println("Došlo je do greške");
 	      	}
+	      mj.CloseConnection();
 		return contacts;
 	      
 	 }
@@ -101,13 +118,14 @@ public class Parser {
 	public ArrayList<Kontakt> parseJSON(String fileName) {
 		Osoba osoba;
 		Telefon tel;
-		AdresaStanovanja adr;
+		//AdresaStanovanja adr;
 		List<Telefon> telefoni=new ArrayList<Telefon>();
 		List<AdresaStanovanja> adrese=new ArrayList<AdresaStanovanja>();
-		Kontakt k;
+		//Kontakt k;
 		contacts.clear();
-		
+		MjestoService mj=new MjestoService();
 		try {
+			
 			FileReader reader = new FileReader(fileName);
 			JSONObject all = (JSONObject) jsonParser.parse(reader);
 
@@ -136,10 +154,15 @@ public class Parser {
 				for(int z=0;z<addresses.size();z++) {
 					JSONObject adresa = (JSONObject) addresses.get(z);
 					zip=Integer.parseInt((String) adresa.get("zip"));
-					adr=new AdresaStanovanja(osoba.getId(),
+					/*adr=new AdresaStanovanja(osoba.getId(),
 						(String)adresa.get("city"),
-						zip);
-				adrese.add(adr);
+						zip);*/
+				adrese.add(new AdresaStanovanja(osoba.getId(),
+						(String)adresa.get("street"),
+						zip));
+				
+				if(!mj.CreateMjesto(zip, (String)adresa.get("city")));
+				mj.UpdateMjestoGrad(zip, (String)adresa.get("city"));
 			}
 			
 			contacts.add(new Kontakt(osoba,telefoni,adrese));
@@ -155,7 +178,7 @@ public class Parser {
 		} catch (NullPointerException ex) {
 			ex.printStackTrace();
 		}
-		
+		mj.CloseConnection();
 		return contacts;
 		
 	}

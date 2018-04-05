@@ -48,7 +48,7 @@
   ],
   "addresses": [
   {
-    "street": "A ne znam vise",
+    "street": "Sjenjak",
     "city": "Tuzla",
     "zip": "75000"
     
@@ -60,6 +60,35 @@
     "zip": "75000"
   }
   ]
+},
+{ "firstName": "RandomGuy",
+  "lastName": "RandomGuyowski",
+  "externalId": "rrandomguyowski",
+  "phones": [
+    {
+      "type": "office",
+      "number": "063-323-232"
+    },
+    {
+      "type": "home",
+      "number": "035-555-555"
+    }
+  ],
+  "addresses": [
+  {
+    "street": "Ulicarska",
+    "city": "Sarajevo",
+    "zip": "70000"
+    
+  },
+  
+  {
+  "street": "Otoka",
+    "city": "Sarajevo",
+    "zip": "70000"
+  }
+  ]
 }
+
 ]
 }

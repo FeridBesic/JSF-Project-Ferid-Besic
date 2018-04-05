@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import source.AdresaStanovanja;
+
 
 public class Service {
 	protected final static EntityManagerFactory emFactory=Persistence.createEntityManagerFactory( "Kontakti" );

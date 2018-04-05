@@ -16,13 +16,13 @@
  
     <h:form id="podaci" >
     	<p:inputTextarea id="url"  valueChangeListener = "#{helloBean.getFileName}" >Ovdje URL dodati</p:inputTextarea>
-    	<p:commandButton width="30%" id="veza" value="Učitaj" 
-    	actionListener="#{helloBean.update}" ><f:ajax execute="veza" render="sadrz" event="click"/></p:commandButton>
+    	<p:commandButton width="30%" id="veza" value="Učitaj" action="#{helloBean.populateList()}"
+    	actionListener="#{helloBean.update}" ><f:ajax execute="veza" render="tabela" event="click"/></p:commandButton>
         
     	
      >
 
-<h2>Vaša tabela sa kontaktima </h2>
+<h2>Vaša tabela sa kontaktima PRIMEFACES</h2>
     	  	<h:panelGroup id="sadrz">
     	  	<p:dataTable text-align="center" border="3" width="100%" value="#{helloBean.getKontakti()}" var="kontakt" id="tabela">
     	  	
@@ -48,7 +48,7 @@
             
             <p:column>
             <f:facet name="header">Adresa</f:facet>
-            	#{helloBean.wrapName(kontakt.getFirstAddress())}
+            	#{kontakt.getFirstAddress()}
             </p:column>
             
             <p:column>

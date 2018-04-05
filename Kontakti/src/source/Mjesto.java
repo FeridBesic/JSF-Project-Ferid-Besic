@@ -48,7 +48,7 @@ public class Mjesto {
 
 	@Override
 	public String toString() {
-		return "Mjesto [postanskiBroj=" + postanskiBroj + ", grad=" + grad + "]";
+		return postanskiBroj + ", " + grad ;
 	}
 
 

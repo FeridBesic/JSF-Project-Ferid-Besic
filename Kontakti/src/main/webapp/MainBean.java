@@ -29,7 +29,7 @@ public class MainBean implements Serializable {
 	private ArrayList<Kontakt> kontakti;
 	private TelefonService telefonservis;
 	private OsobaService osobaservis;
-	private MjestoService mjestoservis;
+	private MjestoService mjestoservis; 
 	private AdresaStanovanjaService adresaservis;
 	Parser parser;
 	   
@@ -37,7 +37,7 @@ public class MainBean implements Serializable {
 	public MainBean() {
 	
 		System.out.println("SAD SAM POKRENUT");
-		name="Pocetak";
+		//name="Pocetak";
 		telefonservis=new TelefonService();
 		osobaservis=new OsobaService();
 		mjestoservis=new MjestoService();
@@ -45,6 +45,7 @@ public class MainBean implements Serializable {
 		kontakti=new ArrayList<Kontakt>();
 		populateList();
 		parser=new Parser();
+		
 			
 	}
 
@@ -71,7 +72,7 @@ public class MainBean implements Serializable {
 	}
 		
 	public void populateList(/*List<Kontakt> kontakti*/) {
-		//createOsobe();
+		createOsobe();
 		List<Osoba> osobe;
 		osobe=osobaservis.FetchAllOsoba();
 		Kontakt k=new Kontakt();
@@ -93,17 +94,22 @@ public class MainBean implements Serializable {
 			telefonservis.CreateTelefon("061-999-999", "bwayne", 1);
 			telefonservis.CreateTelefon("061-555-121", "ckent", 1);
 			telefonservis.CreateTelefon("061-111-111", "fbesic", 0);
+			mjestoservis.CreateMjesto(75000, "Tuzla");
+			mjestoservis.CreateMjesto(70000, "Sarajevo");
 		}
 	//BINDED METHODS
 		public void update(ActionEvent e) {
 			
 			System.out.println(e.getComponent().getClientId());	
 			ArrayList<Kontakt> newkontakti=new ArrayList<Kontakt>();
+			
 			if(name.contains(".json"))
 			newkontakti=parser.parseJSON(name);
-			if(name.contains(".xml"))
+			else if(name.contains(".xml"))
 			newkontakti=parser.parseXML(name);
-			boolean test;
+			else
+				System.out.println("Bad format file!");
+			
 			updateList(newkontakti);
 			populateList();
 		}
@@ -113,17 +119,23 @@ public class MainBean implements Serializable {
 		public void delete(ActionEvent e) {
 			
 			int ind=parseResponse(e.getComponent().getClientId().split(":"));
-			if(ind>-1) {
+			if(ind>-1) 
 				deleteList(ind);
-			}
-			populateList();
-				
+			else
+				System.out.println("There has been a mistake!");
 		}
 		
 		public void getFileName(ValueChangeEvent e) {
 					name=e.getNewValue().toString();
 					System.out.println(name);
 					
+		}
+		
+		public String wrapName(AdresaStanovanja r) {
+		if(r!=null)
+			return (r.getUlica()+" "+mjestoservis.FindMjesto(r.getPostanskiBroj()).toString());
+		else
+			return "Nan";
 		}
 		
 		//HELPER FUNCTIONS

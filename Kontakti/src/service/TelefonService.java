@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-import javax.persistence.Query;
+
 
 import source.Telefon;
 

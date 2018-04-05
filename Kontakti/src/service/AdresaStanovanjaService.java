@@ -1,7 +1,7 @@
 
 package service;
 import java.util.List;
-import javax.persistence.Query;
+
 import mapping.AdresaStanovanjaKey;
 import source.AdresaStanovanja;
 
@@ -35,7 +35,7 @@ public class AdresaStanovanjaService extends Service{
 	      
 	}
  
-		
+		//ADRESE SU IMMUTABLE NTORKE JER SU SASTAVLJENE SAMO OD PRIMARNIH KLJUCEVA
 	/*public void UpdateAdresaStanovanjaUlica(String street,int zipcode,String personId,String newStreet) {
 		AdresaStanovanjaKey key=new AdresaStanovanjaKey(personId,street,zipcode);
 		AdresaStanovanja adresa = entityManager.find( AdresaStanovanja.class, key );

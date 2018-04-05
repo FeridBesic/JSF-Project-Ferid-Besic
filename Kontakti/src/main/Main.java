@@ -1,5 +1,5 @@
 package main;
-/*
+
 import java.util.List;
 
 import service.AdresaStanovanjaService;
@@ -21,7 +21,7 @@ public class Main {
 		OsobaService osobaservis=new OsobaService();
 		MjestoService mjestoservis=new MjestoService();
 		AdresaStanovanjaService adresaservis=new AdresaStanovanjaService();
-		System.out.println(adresaservis.CreateAdresaStanovanja("Brcanska", 75000, "fbesic"));
+		/*System.out.println(adresaservis.CreateAdresaStanovanja("Brcanska", 75000, "fbesic"));
 		System.out.println(adresaservis.CreateAdresaStanovanja("Jednosmjerna", 69000, "fbesicdrugi"));
 		System.out.println(adresaservis.CreateAdresaStanovanja("Ulicarska", 10000, "fbesictreci"));
 		
@@ -36,29 +36,30 @@ public class Main {
 		System.out.println(telefonservis.CreateTelefon("062-111-111", "fbesic", 1));
 		System.out.println(telefonservis.CreateTelefon("062-222-222", "ldzinic", 2));
 		System.out.println(telefonservis.CreateTelefon("062-333-333", "aomerovic", 3));
-		
+		*/
 		List<Telefon> listtelefon=telefonservis.FetchAllTelefon();
 		for(Telefon l: listtelefon) {
 			System.out.println(l);
-			telefonservis.DeleteTelefon(l.getBrojTelefona());
+			//telefonservis.DeleteTelefon(l.getBrojTelefona());
 		}
 		
 		List<Osoba> listosoba=osobaservis.FetchAllOsoba();
 		for(Osoba l: listosoba) {
 			System.out.println(l);
-			osobaservis.DeleteOsoba(l.getId());
+			//osobaservis.DeleteOsoba(l.getId());
+			System.out.println(l);
 		}
 		
 		List<Mjesto> listmjesto=mjestoservis.FetchAllMjesto();
 		for(Mjesto l: listmjesto) {
 			System.out.println(l);
-			mjestoservis.DeleteMjesto(l.get_postanskiBroj());
+			//mjestoservis.DeleteMjesto(l.get_postanskiBroj());
 		}
 		
 		List<AdresaStanovanja> listadresa=adresaservis.FetchAllAdresaStanovanja();
 		for(AdresaStanovanja l: listadresa) {
 			System.out.println(l);
-			adresaservis.DeleteAdresaStanovanja(l.getUlica(), l.getPostanskiBroj(), l.getOsobaid());
+			//adresaservis.DeleteAdresaStanovanja(l.getUlica(), l.getPostanskiBroj(), l.getOsobaid());
 		}
 		
 		telefonservis.CloseConnection();
@@ -67,7 +68,7 @@ public class Main {
 		adresaservis.CloseConnection();
 	}
 
-}*/
+}
 
 /*import parseri.Parser;
 
@@ -79,12 +80,12 @@ public class Main {
       
 	   
    }
-}*/
+}
 
 
 
 
-import parseri.Parser;
+/*import parseri.Parser;
 public class Main {
 
 	private static final String filePath = "C:\\Users\\Ferid\\eclipse-workspace\\Kontakti\\src\\tester.json";
@@ -94,5 +95,5 @@ public class Main {
 		parser.parseJSON(filePath);
 	}
 
-}
+}*/
 

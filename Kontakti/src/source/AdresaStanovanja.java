@@ -7,6 +7,7 @@ import javax.persistence.Table;
 
 import mapping.AdresaStanovanjaKey;
 
+
 @Entity
 @IdClass(AdresaStanovanjaKey.class)
 @Table
@@ -57,10 +58,14 @@ public class AdresaStanovanja {
 	public void setPostanskiBroj(int postanskiBroj) {
 		this.postanskiBroj = postanskiBroj;
 	}
+	
+	
+	
+	
 
 	@Override
 	public String toString() {
-		return "AdresaStanovanja [ulica=" + ulica + ", postanskiBroj=" + postanskiBroj + ", osobaid=" + osobaid + "]";
+		return ( ulica + "," + postanskiBroj);
 	}
 
 	
